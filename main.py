@@ -9,8 +9,8 @@ import pandas as pd
 
 # load the environment variables
 load_dotenv()
-TOKEN = os.getenv('bot_key')
-CHANNEL_ID = os.getenv('channel_id')
+TOKEN = os.getenv('TOKEN')
+CHANNEL_ID = os.getenv('CHANNEL_ID')
 
 # read the list of roasts
 path = "roast_list.csv"
@@ -36,7 +36,7 @@ async def on_message(message):
     if message.mentions:
         for mention in message.mentions:
             if "!bully" in message.content:
-                response = str(mention) + " " + roasting_list.sample(n=1).iloc[0,0]
+                response = str(mention.mention) + " " + roasting_list.sample(n=1).iloc[0,0]
                 await message.channel.send(response)
     # Check if the message is "!bully" and respond
     if message.content == "!bully":
